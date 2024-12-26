@@ -1,0 +1,12 @@
+FROM racket/racket:8.15
+
+WORKDIR /app
+
+COPY info.rkt .
+RUN raco pkg install --auto --no-docs --name project
+
+COPY . .
+
+RUN raco setup --no-docs project
+
+ENTRYPOINT /app/entrypoint.sh
